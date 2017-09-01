@@ -1,4 +1,3 @@
-import property from 'ember-addons/ember-computed-decorators';
 import UserCardContents from 'discourse/components/user-card-contents';
 
 export default {
