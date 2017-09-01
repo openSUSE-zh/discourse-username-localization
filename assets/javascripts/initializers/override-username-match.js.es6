@@ -5,7 +5,7 @@ export default {
   before: 'inject-discourse-objects',
   initialize() {
 
-    alert('loaded');
+    console.log('loaded');
 
     UserCardContents.reopen({
 
