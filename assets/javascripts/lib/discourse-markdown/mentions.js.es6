@@ -36,7 +36,6 @@ function addMention(buffer, matches, state) {
   }
   
   export function setup(helper) {
-    console.log('loaded');
     helper.registerPlugin(md => {
   
       const rule = {
