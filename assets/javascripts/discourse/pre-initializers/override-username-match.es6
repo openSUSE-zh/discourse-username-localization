@@ -6,6 +6,8 @@ export default {
   before: 'inject-discourse-objects',
   initialize() {
 
+    alert('loaded');
+
     UserCardContents.reopen({
 
       _show(username, $target) {
