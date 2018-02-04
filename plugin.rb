@@ -1,20 +1,25 @@
 # name: username-localization
 # about:  Localized username support, now only tested Chinese.
-# version: 0.1
-# authors: freemangl, zh99998 <zh99998@gmail.com>
+# version: 0.2
+# authors: freemangl, zh99998 <zh99998@gmail.com>, marguerite <marguerite@opensuse.org>
 
 gem "chinese_pinyin", "1.0.0"
 gem "romaji", "0.2.3"
 
 after_initialize do
 
-  ::USERNAME_ROUTE_FORMAT = /[\w.\-\%\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]+?/
+  RouteFormat.class_eval do
+    def self.username
+      /[\w.\-\%\u4E00-\u9FD5\u3400-\u4DBF\u{20000}-\u{2A6DF}\u{2A700}-\u{2CEAF}\uF900–\uFAFF\u{2F800}-\u{2FA1D}\uAC00–\uD7AF\u3040-\u30FF\u31F0–\u31FF\u{1B000}–\u{1B0FF}\u3005]+?/
+    end
+  end
 
   User.class_eval do
     def self.system_avatar_template(username)
       # TODO it may be worth caching this in a distributed cache, should be benched
       if SiteSetting.external_system_avatars_enabled
         url = SiteSetting.external_system_avatars_url.dup
+        url = "#{Discourse::base_uri}#{url}" unless url =~ /^https?:\/\//
         url.gsub! "{color}", letter_avatar_color(username.downcase)
         url.gsub! "{username}", username
         if username[0] =~ /[^\w]/
@@ -22,6 +27,7 @@ after_initialize do
         else
           url.gsub! "{first_letter}", username[0].downcase
         end
+        url.gsub! "{hostname}", Discourse.current_hostname
         url
       else
         "#{Discourse.base_uri}/letter_avatar/#{username.downcase}/{size}/#{LetterAvatar.version}.png"
