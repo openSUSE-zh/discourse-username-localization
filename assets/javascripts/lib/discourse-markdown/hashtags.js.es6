@@ -1,3 +1,5 @@
+// We wrote this by ourselves.
+// CJK hashtags cannot be linked and are unclickable. So we manually link them.
 function addHashTag(buffer, matches, state) {
   let hashtag = matches[1] || matches[2];
   let getURL = state.md.options.discourse.getURL;
