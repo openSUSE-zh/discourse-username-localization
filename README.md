@@ -2,6 +2,10 @@
 
 Localized username support.
 
+This plugin is deprecated. Discourse Official supports unicode username since 2.3.0 beta9. Only the javascript part is valid for now, and will be deprecated soon.
+
+In beta9+, set 'unicode username' to enabled and 'unicode username whitelist' to '[\w.\-\%\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}]+?' will have the same effect.
+
 ## Install
 
 ### Docker
@@ -15,8 +19,7 @@ hooks:
         cd: $home/plugins
         cmd:
           - git clone https://github.com/discourse/docker_manager.git
-          - git clone https://github.com/zh99998/discourse-username-localization.git
-          - bash discourse-username-localization/install.sh
+          - git clone https://github.com/openSUSE-zh/discourse-username-localization.git
 ```          
 
 ### Vagrant
