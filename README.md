@@ -4,7 +4,7 @@ Localized username support.
 
 This plugin is deprecated. Discourse Official supports unicode username since 2.3.0 beta9. Only the javascript part is valid for now, and will be deprecated soon.
 
-In beta9+, set 'unicode username' to **true** and 'unicode username whitelist' to '**[\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}]+?**' will have the same effect.
+In beta9+, set 'unicode username' to **true** and 'unicode username whitelist' to '**[\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}]**' will have the same effect.
 
 ## Install
 
